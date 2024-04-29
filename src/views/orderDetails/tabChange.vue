@@ -24,9 +24,15 @@ import { getOrderDetailPage } from '@/api/order'
   name: 'TabChange'
 })
 export default class extends Vue {
-  @Prop({ default: '' }) orderStatics: any
-  @Prop({ default: '' }) defaultActivity: any
-  private activeIndex: number = this.defaultActivity || 0
+   @Prop({ default: '' }) orderStatics: any
+   @Prop({ default: '' }) defaultActivity: any
+  // private activeIndex: number = this.defaultActivity || 0
+
+  private activeIndex: number = 0;  // 默认初始化为 0
+
+  created() {
+    this.activeIndex = Number(this.defaultActivity) || 0;  // 在组件创建后设置
+  }
 
   @Watch('defaultActivity')
   private onChange(val) {
